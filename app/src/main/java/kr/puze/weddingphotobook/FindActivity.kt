@@ -40,7 +40,8 @@ class FindActivity : AppCompatActivity() {
 
     private fun init(){
         dialogUtil = DialogUtil(this@FindActivity)
-        val path = ((Environment.getExternalStorageDirectory().absolutePath))
+        val path = ((applicationContext.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)!!.path))
+        Log.d("dudco", path)
         checkPermission(path)
         image_back.setOnClickListener { finish() }
         text_add_find.setOnClickListener {
@@ -74,6 +75,7 @@ class FindActivity : AppCompatActivity() {
         datas.clear()
         val f = File(path)
         val files: Array<File>? = f.listFiles()
+//        Log.d("dudco", );
         if (files != null) {
             if(files.isNotEmpty()){
                 for(file in files){

@@ -1,16 +1,17 @@
 package kr.puze.weddingphotobook
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kr.puze.weddingphotobook.Adapter.MainGridAdapter
+import kr.puze.weddingphotobook.Epub.EpubNavigator
+import kr.puze.weddingphotobook.Epub.MainActivity
 import kr.puze.weddingphotobook.Utils.PrefUtil
 
 class MainActivity : AppCompatActivity() {
-
     companion object{
         lateinit var mainAdapter: MainGridAdapter
         lateinit var prefUtil: PrefUtil
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun init(){
         prefUtil = PrefUtil(this@MainActivity)
+        prefUtil.getStringArrayPref(prefUtil.KEY).map { str -> Log.d("dudco", str) }
         setGridView(prefUtil.getStringArrayPref(prefUtil.KEY))
 
         text_move_main.visibility = View.INVISIBLE
@@ -53,6 +55,9 @@ class MainActivity : AppCompatActivity() {
         grid_main.adapter = mainAdapter
         grid_main.setOnItemClickListener { parent, view, position, id ->
             try {
+                var intent = Intent(this@MainActivity, MainActivity::class.java);
+                intent.putExtra("path", items[position]);
+                startActivity(intent)
             } catch (e: TypeCastException) {
             }
         }

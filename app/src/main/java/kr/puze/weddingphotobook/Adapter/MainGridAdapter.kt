@@ -34,13 +34,13 @@ class MainGridAdapter(private val items: ArrayList<String>, var isOnEdit: Boolea
         }
 
         Log.d("LOGTAG, Fitting Grid", items[position] + position)
-        Glide.with(context).load(items[position]).into(view!!.image_item)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            view.image_item.clipToOutline = true
-        }
+//        Glide.with(context).load(items[position]).into(view!!.image_item)
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            view.image_item.clipToOutline = true
+//        }
 
         if(isOnEdit){
-            view.image_uncheck.visibility = View.VISIBLE
+            view!!.image_uncheck.visibility = View.VISIBLE
             view.image_uncheck.setOnClickListener {
                 view.image_uncheck.visibility = View.GONE
                 view.image_check.visibility = View.VISIBLE
@@ -50,7 +50,7 @@ class MainGridAdapter(private val items: ArrayList<String>, var isOnEdit: Boolea
                 view.image_check.visibility = View.GONE
             }
         }else{
-            view.image_uncheck.visibility = View.GONE
+            view!!.image_uncheck.visibility = View.GONE
             view.image_check.visibility = View.GONE
         }
         return view
